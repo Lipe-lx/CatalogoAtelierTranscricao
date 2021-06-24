@@ -1,6 +1,7 @@
 package br.com.dominio.catalogoateliertranscricao.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,9 @@ class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario
         val dao = ProdutosDao()
         botaoSalvar.setOnClickListener {
             val produtoNovo = criaProduto()
+            Log.i("FormularioProduto", "onCreate: $produtoNovo ")
             dao.adiciona(produtoNovo)
+            Log.i("FormularioProduto", "onCreate: ${dao.buscaTodos()} ")
             finish()
         }
     }
@@ -33,8 +36,8 @@ class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario
         val campoColecao = findViewById<EditText>(R.id.activitu_formulario_produto_colecao)
         val colecao = campoColecao.text.toString()
 
-        val campoDescricao = findViewById<EditText>(R.id.activitu_formulario_produto_descricao)
-        val descricao = campoDescricao.text.toString()
+        val campoDimensao = findViewById<EditText>(R.id.activitu_formulario_produto_dimensao)
+        val dimensao = campoDimensao.text.toString()
 
         val campoValor = findViewById<EditText>(R.id.activitu_formulario_produto_valor)
         val valorEmTexto = campoValor.text.toString()
@@ -47,7 +50,7 @@ class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario
         return Produto(
             nome = nome,
             colecao = colecao,
-            dimensao = descricao,
+            dimensao = dimensao,
             valor = valor
         )
     }
